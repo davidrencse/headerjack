@@ -1,0 +1,5 @@
+import type { PreparedRequest } from '../types';
+
+export function RequestPreviewCard({ request }: { request: PreparedRequest }) {
+  return <article className="rounded-xl border border-slate-800 bg-slate-950/60 p-4"><div className="flex flex-wrap items-center gap-2"><span className="rounded bg-cyan-400 px-2 py-1 text-xs font-bold text-slate-950">{request.method}</span><strong className="text-white">{request.label}</strong><span className="text-xs text-slate-500">{request.category}</span></div><p className="mt-2 break-all text-sm text-slate-300">{request.url}</p><details className="mt-3"><summary className="cursor-pointer text-sm text-cyan-200">Headers and body</summary><pre className="codeblock mt-2 rounded-lg bg-slate-900 p-3 text-xs text-slate-200">{request.headers.map(h => `${h.name}: ${h.value}`).join('\n') || 'No headers'}{request.bodyPreview ? `\n\n${request.bodyPreview}` : ''}</pre></details>{request.safetyNotes?.length ? <ul className="mt-3 text-xs text-amber-100">{request.safetyNotes.map((n, i) => <li key={i}>• {n}</li>)}</ul> : null}</article>;
+}
